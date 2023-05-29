@@ -27,6 +27,7 @@ class Common(Configuration):
         'drf_yasg',  
 
         # Your apps
+        'apps.news',
     )
 
     # https://docs.djangoproject.com/en/2.0/topics/http/middleware/
