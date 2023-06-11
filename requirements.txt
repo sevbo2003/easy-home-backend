@@ -18,6 +18,7 @@ djangorestframework==3.14.0
 Markdown
 django-filter==23.2
 djangorestframework-simplejwt==5.2.2
+django-parler-rest==2.2
 django-redis==5.2.0 
 redis==4.5.5
 django-ckeditor-5==0.2.7
