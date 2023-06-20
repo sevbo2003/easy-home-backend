@@ -227,3 +227,10 @@ class Common(Configuration):
     # CORS_ALLOW_METHODS = getenv(
     #     'CORS_ALLOW_METHODS', type=list, default=list(default_methods)
     # )
+
+
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv(os.path.join(BASE_DIR, '.env'))
