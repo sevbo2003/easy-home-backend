@@ -215,6 +215,13 @@ class Common(Configuration):
 
     MAIN_DOMAIN = os.getenv('MAIN_DOMAIN', 'http://127.0.0.1:8000')
 
+    gettext = lambda s: s
+    LANGUAGES = (
+        ('en', gettext('English')),
+        ('ru', gettext('Russian')),
+        ('uz', gettext('Uzbek')),
+    )
+
     CORS_ORIGIN_ALLOW_ALL = True
     # CORS_ORIGIN_WHITELIST = os.getenv('CORS_ORIGIN_WHITELIST').split()
     # CORS_ORIGIN_REGEX_WHITELIST = [
