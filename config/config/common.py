@@ -75,7 +75,7 @@ class Common(Configuration):
     LANGUAGE_CODE = 'en-us'
     # If you set this to False, Django will make some optimizations so as not
     # to load the internationalization machinery.
-    USE_I18N = False
+    USE_I18N = True
     USE_L10N = True
     USE_TZ = True
     LOGIN_REDIRECT_URL = '/'
@@ -221,6 +221,9 @@ class Common(Configuration):
         ('ru', gettext('Russian')),
         ('uz', gettext('Uzbek')),
     )
+
+    MODELTRANSLATION_LANGUAGES = ('uz', 'ru', 'en')
+    MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'
 
     CORS_ORIGIN_ALLOW_ALL = True
     # CORS_ORIGIN_WHITELIST = os.getenv('CORS_ORIGIN_WHITELIST').split()
