@@ -2,9 +2,11 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+import dotenv
 
 
 def main():
+    dotenv.load_dotenv(dotenv.find_dotenv(), override=True)
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.config")
     os.environ.setdefault("DJANGO_CONFIGURATION", "Local")
 
