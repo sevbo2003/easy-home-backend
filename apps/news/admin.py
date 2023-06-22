@@ -12,3 +12,17 @@ class NewsAdmin(admin.ModelAdmin):
         (None, {'fields': ('title', 'description', 'content', 'image', 'is_featured', 'slug',)}),
     )
     prepopulated_fields = {'slug': ('title',)}
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    list_filter = ('name',)
+    search_fields = ('name',)
+    ordering = ('name',)
+    fieldsets = (
+        (None, {'fields': ('name',)}),
+    )
+
+
+admin.site.register(News, NewsAdmin)
+admin.site.register(Category, CategoryAdmin)
