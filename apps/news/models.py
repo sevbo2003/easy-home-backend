@@ -26,4 +26,9 @@ class News(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super(News, self).save(*args, **kwargs)
+    
+    class Meta:
+        ordering = ('-created_at',)
+        verbose_name = 'News'
+        verbose_name_plural = 'News'
         
