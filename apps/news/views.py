@@ -32,4 +32,13 @@ class NewsViewSet(viewsets.ModelViewSet):
         if self.action == 'retrieve':
             return NewsRetrieveSerializers
         return NewsSerializer
+
+    @action(detail=False, methods=['get'])
+    def featured_posts(self, request):
+        news = News.objects.filter(is_featured=True)
+        serializer = NewsSerializer(news, many=True)
+        pagination = self.paginate_queryset(news)
+        if pagination is not None:
+            return self.get_paginated_response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
