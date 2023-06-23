@@ -23,7 +23,7 @@ django-redis==5.2.0
 redis==4.5.5
 drf-yasg==1.21.5
 python-dotenv==1.0.0
-django-modeltranslation==0.18.10
+django-modeltranslation
 
 # Developer Tools
 ipython==8.13.2
