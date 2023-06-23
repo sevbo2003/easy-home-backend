@@ -16,6 +16,9 @@ class CategoryViewSet(viewsets.ModelViewSet):
         category = self.get_object()
         news = News.objects.filter(category=category)
         serializer = NewsSerializer(news, many=True)
+        pagination = self.paginate_queryset(news)
+        if pagination is not None:
+            return self.get_paginated_response(serializer.data)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
