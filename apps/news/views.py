@@ -11,11 +11,19 @@ class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
     http_method_names = ['get', 'head', 'options']
 
+    @action(detail=True, methods=['get'])
+    def news(self, request, pk=None):
+        category = self.get_object()
+        news = News.objects.filter(category=category)
+        serializer = NewsSerializer(news, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 class NewsViewSet(viewsets.ModelViewSet):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
     http_method_names = ['get', 'head', 'options']
+    lookup_field = 'slug'
 
     def get_serializer_class(self):
         if self.action == 'retrieve':
