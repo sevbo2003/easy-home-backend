@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from apps.news.models import News, Category
+from django.conf import settings
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -12,6 +13,7 @@ class NewsSerializer(serializers.ModelSerializer):
     category = serializers.ListSerializer(child=serializers.CharField())
     title = serializers.SerializerMethodField(method_name='get_title')
     description = serializers.SerializerMethodField(method_name='get_description')
+    image = serializers.SerializerMethodField(method_name='get_image')
     
     class Meta:
         model = News
@@ -32,7 +34,13 @@ class NewsSerializer(serializers.ModelSerializer):
             'ru': obj.description_ru,
         }
         return dict
-
+    
+    def get_image(self, obj):
+        print(obj.image.url)
+        if obj.image.url[0] == '/':
+            return settings.MAIN_DOMAIN + obj.image.url
+        return obj.image
+    
 
 class NewsRetrieveSerializers(serializers.ModelSerializer):
     category = serializers.ListSerializer(child=serializers.CharField())
