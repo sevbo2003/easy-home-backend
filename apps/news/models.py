@@ -10,6 +10,10 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
+    
+    @property
+    def posts_count(self):
+        return self.news_set.count()
 
 
 class News(models.Model):

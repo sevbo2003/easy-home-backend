@@ -5,7 +5,7 @@ from apps.news.models import News, Category
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('id', 'name_uz', 'name_en', 'name_ru')
+        fields = ('id', 'name_uz', 'name_en', 'name_ru', 'posts_count',)
         
 
 class NewsSerializer(serializers.ModelSerializer):
