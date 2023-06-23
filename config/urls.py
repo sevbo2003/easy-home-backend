@@ -14,9 +14,11 @@ schema_view = get_schema_view(
     public=True,
 )
 
+admin_path = settings.ADMIN_PATH
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path(f'admin/{admin_path}/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     # Apps

@@ -64,10 +64,14 @@ class Common(Configuration):
         }
     else:
         DATABASES = {
-            'default': dj_database_url.config(
-                default='postgres://postgres:@postgres:5432/postgres',
-                conn_max_age=int(os.getenv('POSTGRES_CONN_MAX_AGE', 600))
-            )
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': os.getenv('POSTGRES_DB'),
+                'USER': os.getenv('POSTGRES_USER'),
+                'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+                'HOST': '127.0.0.1',
+                'PORT': 5432,
+            }
         }
 
     # General
@@ -192,9 +196,9 @@ class Common(Configuration):
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PAGINATION_CLASS': 'core.paginations.CustomPagination',
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        # "rest_framework_simplejwt.authentication.JWTAuthentication",
         'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
     ),
 }
 
@@ -215,6 +219,7 @@ class Common(Configuration):
     SESSION_SAVE_EVERY_REQUEST = True
 
     MAIN_DOMAIN = os.getenv('MAIN_DOMAIN', 'http://127.0.0.1:8000')
+    ADMIN_PATH = os.getenv('ADMIN_PATH', 'hello-admin')
 
     gettext = lambda s: s
     LANGUAGES = (
