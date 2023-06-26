@@ -28,3 +28,31 @@ class ContactViewSet(viewsets.ModelViewSet):
                 return Response({'status': 'success', 'message': 'Your message has been sent successfully'}, status=status.HTTP_201_CREATED)
             return Response({'status': 'error', 'message': 'Phone number is not verified'}, status=status.HTTP_400_BAD_REQUEST)
         return Response({'status': 'error', 'message': 'Phone number is not verified'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class PhoneTokenViewSet(viewsets.ModelViewSet):
+    queryset = PhoneToken.objects.all()
+    serializer_class = PhoneTokenCreateSerializer
+    permission_classes = [permissions.AllowAny]
+    http_method_names = ['post']
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        phone_number = serializer.validated_data.get('phone_number')
+        token = generate_token(phone_number)
+        message = "Sizning maxsus kodiz: {}".format(token)
+        eskiz.send_sms(str(phone_number)[1:], message, from_whom='4546')
+        # send_background_sms.apply_async((phone_number, message))
+        return Response({'status': 'success'})
+
+    @action(detail=False, methods=['post'])
+    def verify(self, request, *args, **kwargs):
+        serializer = PhoneTokenVerifySerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        phone_number = serializer.validated_data.get('phone_number')
+        token = serializer.validated_data.get('token')
+        if verify_token(phone_number, token):
+            return Response({'status': 'success'})
+        return Response({'status': 'error'}, status=status.HTTP_400_BAD_REQUEST)
+    
