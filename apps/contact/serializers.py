@@ -11,17 +11,15 @@ class ContactSerializer(serializers.ModelSerializer):
     def validate_phone_number(self, value):
         validate_uzb_phone_number(value)
         return value
+
+
+class PhoneTokenCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PhoneToken
+        fields = ['phone_number']
+
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        validate_uzb_phone_number(data.get('phone_number', None))
+        return data
     
-    def create(self, validated_data):
-        number = validated_data['phone_number']
-        phone_number_token = PhoneToken.objects.filter(phone_number=number).last()
-        if phone_number_token:
-            if phone_number_token.is_expired:
-                phone_number_token.delete()
-                return serializers.ValidationError("Phone number is not verified")
-            elif not phone_number_token.is_verified:
-                return serializers.ValidationError("Phone number is not verified")
-            return Contact.objects.create(**validated_data)
-        else:
-            return serializers.ValidationError("Phone number is not verified")
-        
