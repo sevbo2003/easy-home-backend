@@ -22,4 +22,15 @@ class PhoneTokenCreateSerializer(serializers.ModelSerializer):
         data = super().validate(attrs)
         validate_uzb_phone_number(data.get('phone_number', None))
         return data
+
+
+class PhoneTokenVerifySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PhoneToken
+        fields = ['phone_number', 'token']
+
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        validate_uzb_phone_number(data.get('phone_number', None))
+        return data
     
