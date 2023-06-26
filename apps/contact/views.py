@@ -7,7 +7,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from apps.contact.models import Contact, PhoneToken
 from apps.contact.serializers import ContactSerializer, PhoneTokenCreateSerializer, PhoneTokenVerifySerializer
 from apps.contact.utils import generate_token, verify_token
-# from apps.contact.tasks import send_background_sms
+from apps.contact.tasks import send_background_sms
 from core.eskiz import eskiz
 
 
@@ -42,8 +42,7 @@ class PhoneTokenViewSet(viewsets.ModelViewSet):
         phone_number = serializer.validated_data.get('phone_number')
         token = generate_token(phone_number)
         message = "Sizning maxsus kodiz: {}".format(token)
-        eskiz.send_sms(str(phone_number)[1:], message, from_whom='4546')
-        # send_background_sms.apply_async((phone_number, message))
+        send_background_sms.apply_async((phone_number, message))
         return Response({'status': 'success'})
 
     @action(detail=False, methods=['post'])

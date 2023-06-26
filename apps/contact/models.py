@@ -1,5 +1,6 @@
 from django.db import models
 from apps.contact.validators import validate_uzb_phone_number
+from apps.contact.tasks import send_background_sms
 from core.eskiz import eskiz
 from django.utils import timezone
 import random
@@ -60,6 +61,6 @@ class PhoneToken(models.Model):
         phone_token.expires_at = timezone.now() + timezone.timedelta(minutes=3)
         phone_token.save()
         message = "Sizning tokeningiz: {}".format(token)
-        eskiz.send_sms(str(phone_number)[1:], message, from_whom='4546')
-        # send_background_sms.apply_async((phone_number, message))
+        send_background_sms.apply_async((phone_number, message))
         return phone_token.token
+    

@@ -102,7 +102,9 @@ venv.bak/
 
 # django staticfiles
 /static
+/media
 migrations/
+deploy/
 
 # mypy
 .mypy_cache/
