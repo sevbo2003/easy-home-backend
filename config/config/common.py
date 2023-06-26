@@ -30,6 +30,7 @@ class Common(Configuration):
         'apps.news',
         'apps.contact',
         'apps.newsletter',
+        'apps.users',
     )
 
     # https://docs.djangoproject.com/en/2.0/topics/http/middleware/
