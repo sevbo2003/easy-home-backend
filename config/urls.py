@@ -24,6 +24,7 @@ urlpatterns = [
     # Apps
     path('api/v1/news/', include('apps.news.urls')),
     path('api/v1/contact/', include('apps.contact.urls')),
+    path('api/v1/newsletter/', include('apps.newsletter.urls')),
     
     # Swagger
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='swagger'),
