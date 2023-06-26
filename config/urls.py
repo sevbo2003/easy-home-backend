@@ -23,6 +23,8 @@ urlpatterns = [
 
     # Apps
     path('api/v1/news/', include('apps.news.urls')),
+    path('api/v1/contact/', include('apps.contact.urls')),
+    
     # Swagger
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='swagger'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='redoc'),
