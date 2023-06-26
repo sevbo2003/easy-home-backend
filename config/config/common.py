@@ -243,6 +243,9 @@ class Common(Configuration):
     # CORS_ALLOW_METHODS = getenv(
     #     'CORS_ALLOW_METHODS', type=list, default=list(default_methods)
     # )
+
+    ESKIZ_EMAIL = os.getenv('ESKIZ_EMAIL', 'None')
+    ESKIZ_PASSWORD = os.getenv('ESKIZ_PASSWORD', 'None')
     
 
 import os
