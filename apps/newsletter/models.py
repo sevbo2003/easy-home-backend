@@ -10,6 +10,6 @@ class Newsletter(models.Model):
         return self.phone_number
 
     class Meta:
-        verbose_name = _('Foydalanuvchi')
-        verbose_name_plural = _('Foydalanuvchilar')
+        verbose_name = 'Foydalanuvchi'
+        verbose_name_plural = 'Foydalanuvchilar'
         ordering = ('-created_at',)
