@@ -28,6 +28,7 @@ class Common(Configuration):
 
         # Your apps
         'apps.news',
+        'apps.contact',
     )
 
     # https://docs.djangoproject.com/en/2.0/topics/http/middleware/
