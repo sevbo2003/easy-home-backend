@@ -25,6 +25,7 @@ drf-yasg
 python-dotenv
 django-modeltranslation
 eskiz_sms
+celery
 
 # Developer Tools
 ipython
