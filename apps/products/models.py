@@ -13,6 +13,10 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
+    
+    @property
+    def products_count(self):
+        return self.product_set.count()
 
 
 class Product(models.Model):
@@ -35,6 +39,18 @@ class Product(models.Model):
         verbose_name = 'Product'
         verbose_name_plural = 'Products'
         ordering = ('-created_at',)
+
+    @property
+    def parameters(self):
+        return self.parameter_set.all()
+
+    @property
+    def slider_images(self):
+        return self.productsliderimage_set.all()
+    
+    @property
+    def documents(self):
+        return self.document_set.all()
     
 
 class Parameter(models.Model):
