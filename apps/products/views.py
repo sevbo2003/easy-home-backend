@@ -12,6 +12,16 @@ class CategoryViewSet(viewsets.ModelViewSet):
     http_method_names = ['get', 'head', 'options']
     lookup_field = 'slug'
 
+    @action(detail=True, methods=['get'])
+    def products(self, request, slug=None):
+        category = self.get_object()
+        products = category.product_set.all()
+        serializer = ProductSerializer(products, many=True)
+        pagination = self.paginate_queryset(products)
+        if pagination is not None:
+            return self.get_paginated_response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
