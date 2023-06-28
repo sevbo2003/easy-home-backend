@@ -2,6 +2,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.filters import SearchFilter
 from apps.news.models import News, Category
 from apps.news.serializers import CategorySerializer, NewsSerializer, NewsRetrieveSerializers
 
@@ -26,6 +27,8 @@ class NewsViewSet(viewsets.ModelViewSet):
     queryset = News.objects.all()
     serializer_class = NewsSerializer
     http_method_names = ['get', 'head', 'options']
+    filter_backends = [SearchFilter]
+    search_fields = ['title_uz', 'title_en', 'title_ru']
     lookup_field = 'slug'
 
     def get_serializer_class(self):
