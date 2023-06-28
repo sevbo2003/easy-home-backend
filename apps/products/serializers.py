@@ -33,4 +33,9 @@ class ParameterSerializer(serializers.ModelSerializer):
             'ru': obj.name_ru,
         }
         return dict
-    
+
+
+class ProductSliderImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductSliderImage
+        fields = ['image']
