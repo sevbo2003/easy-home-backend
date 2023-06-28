@@ -4,3 +4,5 @@ from apps.about.models import TeamMember
 
 class TeamMemberTranslationOptions(TranslationOptions):
     fields = ('position',)
+
+translator.register(TeamMember, TeamMemberTranslationOptions)
