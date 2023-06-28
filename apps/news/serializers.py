@@ -36,7 +36,6 @@ class NewsSerializer(serializers.ModelSerializer):
         return dict
     
     def get_image(self, obj):
-        print(obj.image.url)
         if obj.image.url[0] == '/':
             return settings.MAIN_DOMAIN + obj.image.url
         return obj.image

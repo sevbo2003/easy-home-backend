@@ -17,4 +17,20 @@ class CategorySerializer(serializers.ModelSerializer):
             'ru': obj.name_ru,
         }
         return dict
+
+
+class ParameterSerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField(method_name='get_name')
+
+    class Meta:
+        model = Parameter
+        fields = ['name', 'value']
+
+    def get_name(self, obj):
+        dict = {
+            'uz': obj.name_uz,
+            'en': obj.name_en,
+            'ru': obj.name_ru,
+        }
+        return dict
     
