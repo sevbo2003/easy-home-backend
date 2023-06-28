@@ -15,7 +15,7 @@ translator.register(Product, ProductTranslationOptions)
 
 
 class ParameterTranslationOptions(TranslationOptions):
-    fields = ('name', 'value',)
+    fields = ('name',)
 
 translator.register(Parameter, ParameterTranslationOptions)
 
