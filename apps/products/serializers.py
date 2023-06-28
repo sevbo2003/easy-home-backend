@@ -8,7 +8,7 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         ref_name = 'ProductsCategory' 
-        fields = ['id', 'name', 'slug']
+        fields = ['id', 'name', 'products_count', 'slug']
     
     def get_name(self, obj):
         dict = {
