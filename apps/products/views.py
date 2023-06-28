@@ -2,8 +2,8 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
-from apps.products.models import Category, Product, Parameter, ProductSliderImage, Document
-from apps.products.serializers import CategorySerializer, ProductSerializer
+from apps.products.models import Category, Product
+from apps.products.serializers import CategorySerializer, ProductSerializer, ProductRetrieveSerializer
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -28,3 +28,8 @@ class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     http_method_names = ['get', 'head', 'options']
     lookup_field = 'slug'
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return ProductRetrieveSerializer
+        return ProductSerializer
