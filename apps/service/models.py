@@ -24,3 +24,12 @@ class Service(models.Model):
 class ServiceImage(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='service')
+
+
+class KeyFeatures(models.Model):
+    service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='key_features')
+    title = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.title
+    
