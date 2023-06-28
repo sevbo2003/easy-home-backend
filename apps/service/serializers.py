@@ -7,8 +7,8 @@ class ServiceImageSerializer(serializers.ModelSerializer):
         model = ServiceImage
         fields = ('image',)
 
-        def to_representation(self, instance):
-            return super().to_representation(instance).get('image')
+    def to_representation(self, instance):
+        return super().to_representation(instance).get('image')
 
 
 class KeyFeaturesSerializer(serializers.ModelSerializer):
