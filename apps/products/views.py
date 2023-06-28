@@ -35,3 +35,13 @@ class ProductViewSet(viewsets.ModelViewSet):
         if self.action == 'retrieve':
             return ProductRetrieveSerializer
         return ProductSerializer
+
+    @action(detail=False, methods=['get'])
+    def featured_products(self, request):
+        products = Product.objects.filter(is_featured=True)
+        serializer = ProductSerializer(products, many=True)
+        pagination = self.paginate_queryset(products)
+        if pagination is not None:
+            return self.get_paginated_response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
