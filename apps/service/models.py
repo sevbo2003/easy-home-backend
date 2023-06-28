@@ -19,6 +19,14 @@ class Service(models.Model):
         verbose_name = 'Service'
         verbose_name_plural = 'Services'
         ordering = ('-created_at',)
+    
+    @property
+    def images(self):
+        return self.images.all()
+    
+    @property
+    def key_features(self):
+        return self.key_features.all()
 
 
 class ServiceImage(models.Model):
