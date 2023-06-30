@@ -30,10 +30,11 @@ class KeyFeaturesSerializer(serializers.ModelSerializer):
 class ServiceSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField(method_name='get_name')
     key_features = KeyFeaturesSerializer(many=True)
+    description = serializers.SerializerMethodField(method_name='get_description')
 
     class Meta:
         model = Service
-        fields = ('id', 'name', 'key_features', 'image', 'slug')
+        fields = ('id', 'name', 'description', 'key_features', 'image', 'slug')
 
     def get_name(self, obj):
         dict = {
@@ -43,16 +44,25 @@ class ServiceSerializer(serializers.ModelSerializer):
         }
         return dict
 
+    def get_description(self, obj):
+        dict = {
+            'uz': obj.description_uz,
+            'en': obj.description_en,
+            'ru': obj.description_ru,
+        }
+        return dict
+
 
 class ServiceRetrieveSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField(method_name='get_name')
     images = ServiceImageSerializer(many=True)
     key_features = KeyFeaturesSerializer(many=True)
+    description = serializers.SerializerMethodField(method_name='get_description')
     content = serializers.SerializerMethodField(method_name='get_content')
 
     class Meta:
         model = Service
-        fields = ('id', 'name', 'key_features', 'image', 'images', 'content', 'slug')
+        fields = ('id', 'name', 'description', 'key_features', 'image', 'images', 'content', 'slug')
 
     def get_name(self, obj):
         dict = {
@@ -71,3 +81,10 @@ class ServiceRetrieveSerializer(serializers.ModelSerializer):
         }
         return dict
     
+    def get_description(self, obj):
+        dict = {
+            'uz': obj.description_uz,
+            'en': obj.description_en,
+            'ru': obj.description_ru,
+        }
+        return dict

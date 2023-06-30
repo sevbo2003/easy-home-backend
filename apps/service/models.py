@@ -5,6 +5,7 @@ from apps.service.managers import ServiceManager
 class Service(models.Model):
     name = models.CharField(max_length=255)
     image = models.ImageField(upload_to='service')
+    description = models.CharField(max_length=500)
     content = models.TextField()
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
