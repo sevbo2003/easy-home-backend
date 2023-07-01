@@ -19,7 +19,7 @@ class Category(models.Model):
     def save(self, *args, **kwargs):
         if not self.value:
             self.value = slugify(self.name)
-            super(Category, self).save(*args, **kwargs)
+        super(Category, self).save(*args, **kwargs)
 
 
 class News(models.Model):
