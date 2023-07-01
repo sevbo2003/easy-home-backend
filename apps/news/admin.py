@@ -26,5 +26,6 @@ class CategoryAdmin(admin.ModelAdmin):
     list_filter = ('name',)
     search_fields = ('name',)
     ordering = ('name',)
+    prepopulated_fields = {'value': ('name',)}
 
 admin.site.register(Category, CategoryAdmin)
