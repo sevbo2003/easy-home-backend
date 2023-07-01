@@ -3,6 +3,7 @@ from django.utils.text import slugify
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
+    value = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
@@ -14,6 +15,11 @@ class Category(models.Model):
     @property
     def posts_count(self):
         return self.news_set.count()
+    
+    def save(self, *args, **kwargs):
+        if not self.value:
+            self.value = slugify(self.name)
+            super(Category, self).save(*args, **kwargs)
 
 
 class News(models.Model):

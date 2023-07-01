@@ -5,9 +5,10 @@ from django.conf import settings
 
 class CategorySerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField(method_name='get_name')
+
     class Meta:
         model = Category
-        fields = ('id', 'name', 'posts_count',)
+        fields = ('id', 'name', 'posts_count', 'value')
     
     def get_name(self, obj):
         dict = {

@@ -22,8 +22,8 @@ admin.site.register(News, NewsAdmin)
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name_uz', 'name_en', 'name_ru')
-    list_filter = ('name',)
+    list_display = ('name_uz','name_ru', 'value', 'posts_count')
+    list_filter = ('name', 'posts_count')
     search_fields = ('name',)
     ordering = ('name',)
 
