@@ -19,7 +19,7 @@ class CategorySerializer(serializers.ModelSerializer):
         
 
 class NewsSerializer(serializers.ModelSerializer):
-    category = CategorySerializer()
+    category = CategorySerializer(many=True)
     title = serializers.SerializerMethodField(method_name='get_title')
     description = serializers.SerializerMethodField(method_name='get_description')
     image = serializers.SerializerMethodField(method_name='get_image')
@@ -51,7 +51,7 @@ class NewsSerializer(serializers.ModelSerializer):
     
 
 class NewsRetrieveSerializers(serializers.ModelSerializer):
-    category = CategorySerializer()
+    category = CategorySerializer(many=True)
     title = serializers.SerializerMethodField(method_name='get_title')
     description = serializers.SerializerMethodField(method_name='get_description')
     content = serializers.SerializerMethodField(method_name='get_content')
