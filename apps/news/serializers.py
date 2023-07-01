@@ -4,13 +4,22 @@ from django.conf import settings
 
 
 class CategorySerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField(method_name='get_name')
     class Meta:
         model = Category
-        fields = ('id', 'name_uz', 'name_en', 'name_ru', 'posts_count',)
+        fields = ('id', 'name', 'posts_count',)
+    
+    def get_name(self, obj):
+        dict = {
+            'uz': obj.name_uz,
+            'en': obj.name_en,
+            'ru': obj.name_ru,
+        }
+        return dict
         
 
 class NewsSerializer(serializers.ModelSerializer):
-    category = serializers.ListSerializer(child=serializers.CharField())
+    category = CategorySerializer()
     title = serializers.SerializerMethodField(method_name='get_title')
     description = serializers.SerializerMethodField(method_name='get_description')
     image = serializers.SerializerMethodField(method_name='get_image')
@@ -42,7 +51,7 @@ class NewsSerializer(serializers.ModelSerializer):
     
 
 class NewsRetrieveSerializers(serializers.ModelSerializer):
-    category = serializers.ListSerializer(child=serializers.CharField())
+    category = CategorySerializer()
     title = serializers.SerializerMethodField(method_name='get_title')
     description = serializers.SerializerMethodField(method_name='get_description')
     content = serializers.SerializerMethodField(method_name='get_content')
