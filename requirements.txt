@@ -26,6 +26,7 @@ python-dotenv
 django-modeltranslation
 eskiz_sms
 celery
+django-cors-headers
 
 # Developer Tools
 ipython
